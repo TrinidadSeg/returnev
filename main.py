@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from models import RequestContract, ResponseContract
+from services import calculate_ev
 
 
 app = FastAPI()
@@ -11,9 +12,4 @@ async def getHealth():
 
 @app.post("/v1/decide")
 async def getRequestContract(request_contract: RequestContract):
-    return ResponseContract(
-        action = "keep_item",
-        expected_savings = 8.50,
-        confidence = 0.87,
-        reasoning = "Hardcoded placeholder decision."
-    )
+    return calculate_ev(request_contract)
