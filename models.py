@@ -3,7 +3,7 @@ from pydantic import BaseModel
 class RequestContract(BaseModel):
     item_value: float
     resale_value: float
-    return_history_count: float
+    return_history_count: int
     order_history_count: int
     e_ltv: float
     p_next_order_return_fraud: float = 0 # Usually 0 since fraudalent behavior has no interest in product
@@ -16,5 +16,5 @@ class RequestContract(BaseModel):
 class ResponseContract(BaseModel):
     action: str
     expected_savings: float
-    confidence: float
+    fraud_probability: float
     reasoning: str
