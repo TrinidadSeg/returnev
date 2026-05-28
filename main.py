@@ -2,8 +2,15 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from models import RequestContract, ResponseContract
 from services import calculate_ev
+import sys
 import logging
+
+logging.basicConfig(
+    level = logging.INFO,
+    format="%(asctime)s %(levelname)s %(name)s: %(message)s"
+)
 logger = logging.getLogger("fraud_engine")
+logger.setLevel(logging.INFO)
 
 MODEL_VERSION = "v1"
 FEATURE_VERSION = "v1.0"
