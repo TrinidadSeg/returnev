@@ -24,19 +24,19 @@ async def getHealth():
             "feature_version": FEATURE_VERSION}
 
 @app.post("/v1/decide")
-async def getRequestContract(request_contract: RequestContract):
-
-    if request_contract.item_value < 0:
-        raise HTTPException(status_code=400, detail="invalid input")
-
-    response = calculate_ev(request_contract)
+async def getRequestContract(request: RequestContract):
+    response = calculate_ev(request)
 
     logger.info({
-        "item_value": request_contract.item_value,
-        "order_id": request_contract.order_id,
+        "order_id": request.order_id,
+        "item_value": request.item_value,
+        "resale_value": request.resale_value,
+        "return_history_count": request.return_history_count,
+        "order_history_count": request.order_history_count,
+        "e_ltv": request.e_ltv,
         "action": response.action,
+        "expected_savings": response.expected_savings,
         "fraud_probability": response.fraud_probability,
-        "expected_savings": response.expected_savings
     })
 
     return response

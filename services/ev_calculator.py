@@ -24,6 +24,7 @@ def calculate_ev(request: RequestContract) -> ResponseContract:
     }
     best_action = max(options, key = options.get)
     response = ResponseContract(
+        order_id = request.order_id,
         action = best_action,
         expected_savings = options[best_action],
         fraud_probability = p_fraud,
