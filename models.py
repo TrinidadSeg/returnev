@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 
 class RequestContract(BaseModel):
+    order_id: str
     item_value: float
     resale_value: float
     return_history_count: int
